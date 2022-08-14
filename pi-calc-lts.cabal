@@ -1,0 +1,80 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           pi-calc-lts
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/pi-calc-lts#readme>
+homepage:       https://github.com/githubuser/pi-calc-lts#readme
+bug-reports:    https://github.com/githubuser/pi-calc-lts/issues
+author:         Aina Centelles Tarrés
+maintainer:     ac2009@hw.ac.uk
+copyright:      2022 Aina Centelles Tarrés
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/pi-calc-lts
+
+library
+  exposed-modules:
+      LTS
+      Pretty
+      Syntax
+      Utils
+  other-modules:
+      Paths_pi_calc_lts
+  hs-source-dirs:
+      src
+  build-depends:
+      Stream
+    , base >=4.7 && <5
+    , containers
+    , nom
+    , syb
+  default-language: Haskell2010
+
+executable pi-calc-lts-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_pi_calc_lts
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      Stream
+    , base >=4.7 && <5
+    , containers
+    , nom
+    , pi-calc-lts
+    , syb
+  default-language: Haskell2010
+
+test-suite pi-calc-lts-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      LTSSpec
+      PrettySpec
+      UtilsSpec
+      Paths_pi_calc_lts
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , Stream
+    , base >=4.7 && <5
+    , containers
+    , hspec
+    , nom
+    , pi-calc-lts
+    , syb
+  default-language: Haskell2010
