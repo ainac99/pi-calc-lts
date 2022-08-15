@@ -6,13 +6,13 @@ cabal-version: 1.12
 
 name:           pi-calc-lts
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/pi-calc-lts#readme>
-homepage:       https://github.com/githubuser/pi-calc-lts#readme
-bug-reports:    https://github.com/githubuser/pi-calc-lts/issues
+description:    Please see the README on GitHub at <https://github.com/ainac99/pi-calc-lts#readme>
+homepage:       https://github.com/ainac99/pi-calc-lts#readme
+bug-reports:    https://github.com/ainac99/pi-calc-lts/issues
 author:         Aina Centelles Tarrés
-maintainer:     ac2009@hw.ac.uk
+maintainer:     ainac99@gmail.com
 copyright:      2022 Aina Centelles Tarrés
-license:        BSD3
+license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
@@ -21,7 +21,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/pi-calc-lts
+  location: https://github.com/ainac99/pi-calc-lts
 
 library
   exposed-modules:

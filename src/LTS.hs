@@ -1,3 +1,11 @@
+{-
+Module      : LTS
+Description : Labelled transition system
+Copyright   : (c) Aina Centelles Tarrés, 2022
+License     : MIT
+Maintainer  : ainac99@gmail.com
+-}
+
 {-# LANGUAGE DeriveGeneric         
            , MultiParamTypeClasses 
            , DeriveAnyClass       -- to derive 'Swappable' 

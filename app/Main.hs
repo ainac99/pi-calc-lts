@@ -1,3 +1,11 @@
+{-
+Module      : Main
+Description : Starting point of pi-calc-lts
+Copyright   : (c) Aina Centelles Tarrés, 2022
+License     : MIT
+Maintainer  : ainac99@gmail.com
+-}
+
 {-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Main where
 
