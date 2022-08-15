@@ -17,22 +17,22 @@ import Language.Nominal
 import Data.Tuple
 import Pretty
 
-{- | Given a state returns the list of all its possible transitions.
-     Transitions are found using the LTS presented in The pi-calculus in FM (Gabbay, 2003).
+{-  Given a state returns the list of all its possible transitions.
+ Transitions are found using the LTS presented in The pi-calculus in FM (Gabbay, 2003).
 -}
 transition :: State -> [Transition]
 
--- | OUT rule
+-- OUT rule
 transition (Out x y p) = [(Out x y p, abst z (Out_act x y, p), [Out_r])]
     where z = freshChannel "z"
 
--- | IN rule
+-- IN rule
 transition (In x abstraction)
     | y `freshFor` x = [(In x abstraction, abst y (In_act x y, p), [In_r])]
     where   y = getChannel abstraction
             p = getBody y abstraction
 
--- | PAR & CLOSE & COM rules
+-- PAR & CLOSE & COM rules
 transition (Par p1 p2) =    par p1 t1 p2 (l1 -1) ++                     -- par rule
                             par p2 t2 p1 (l2 -1) ++                     -- simmetric for par rule
                             checkCloseCom (t1 `combine` t2) (l1*l2 -1)  -- close & com rules
@@ -41,7 +41,7 @@ transition (Par p1 p2) =    par p1 t1 p2 (l1 -1) ++                     -- par r
             l1 = length t1
             l2 = length t2
 
--- | OPEN & RES rules
+-- OPEN & RES rules
 transition (New abstraction) = open y t (l-1) ++ LTS.res y t (l-1)
     where   y = getChannel abstraction
             p = getBody y abstraction
@@ -50,7 +50,7 @@ transition (New abstraction) = open y t (l-1) ++ LTS.res y t (l-1)
 
 transition _ = []
 
--- | OPEN rule
+-- OPEN rule
 open :: Channel -> [Transition] -> Int -> [Transition]
 open _ _ (-1)   = empty
 open y list gas
@@ -61,18 +61,18 @@ open y list gas
                 (p, z, a, q, r) = unpack t
                 [x, y'] = arguments_act a
 
--- | RES rule
+-- RES rule
 res :: Channel -> [Transition] -> Int -> [Transition]
 res _ _ (-1)    = empty
 res y list gas
-    | not (isTau_act a) && y `freshFor` (z, x_act, y_act) = (rest y p, abst z (a, rest y q), r ++ [Res_r]) : LTS.res y list (gas-1)  -- y should be fresh for a too! (?)
+    | not (isTau_act a) && y `freshFor` (z, x_act, y_act) = (rest y p, abst z (a, rest y q), r ++ [Res_r]) : LTS.res y list (gas-1)
     | otherwise                  = LTS.res y list (gas-1)
         where   t = list !! gas
                 (p, z, a, q, r) = unpack t
                 [x_act, y_act] = arguments_act a
 
 
--- | PAR rule
+-- PAR rule
 par :: Process -> [Transition] -> Process -> Int -> [Transition]
 par _ _ _ (-1)   = empty
 par p1 t1 p2 gas
@@ -81,13 +81,13 @@ par p1 t1 p2 gas
     where   t = t1 !! gas
             (p1, z, a, q1, r) = unpack t
 
--- | Given a pair of transitions, checks whether close and com rules are applicable.
+-- Given a pair of transitions, checks whether close and com rules are applicable.
 checkCloseCom :: [(Transition, Transition)] -> Int -> [Transition]
 checkCloseCom _ (-1)    = empty
 checkCloseCom lst gas   = close t  ++ close (swap t) ++ com t ++ com (swap t) ++ checkCloseCom lst (gas-1)
     where t = lst !! gas
 
--- | CLOSE rule
+-- CLOSE rule
 close :: (Transition, Transition) -> [Transition]
 close (t1, t2)
     | isOut_act a1 && isIn_act a2 && x == x' && y `freshFor` (x, p1, p2) && head r1 == Open_r && head r2 == In_r
@@ -98,7 +98,7 @@ close (t1, t2)
             [x, y]               = arguments_act a1
             [x', y']             = arguments_act a2
 
--- | COM rule
+-- COM rule
 com :: (Transition, Transition) -> [Transition]
 com (t1, t2)
     | isOut_act a1 && isIn_act a2 && z == z2 &&  x == x' &&

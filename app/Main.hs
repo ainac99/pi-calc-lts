@@ -11,7 +11,7 @@ import Language.Nominal
 
 main :: IO()
 main = do
-        printTransitions testProcesses 3 -- choose depth of evaluation here.
+        printTransitions testProcesses 1 -- choose depth of evaluation here.
 
 -- Given a list of processes, finds their transition tree up to a certain depth 
 -- and prints them grouped by origin state.
@@ -31,8 +31,7 @@ newOrigins = concatMap (map getDestState)
 
 -- | List of processes to evaluate.
 testProcesses :: [Process]
---testProcesses = [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14]
-testProcesses = [t8]
+testProcesses = [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14]
 
 -- | Some example processes
 t1 = (\[x, y, z] -> Out x y (inp z y (Out y y Nil))) `genAppC` freshNames["x", "y", "z"] :: Process
