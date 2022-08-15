@@ -1,4 +1,4 @@
-# pi-calc-lts. 
+# pi-calc-lts. A pi-calculus implementation using the nom package. 
 
 An implementation of the pi-calculus using the nom package [[3]](#3) for name-handling.
 Part of the thesis: Designing and assessing a pi-calculus evaluator in Haskell using the nom package [[1]](#1). 
