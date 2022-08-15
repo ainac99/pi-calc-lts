@@ -6,7 +6,7 @@ Part of the thesis: Designing and assessing a pi-calculus evaluator in Haskell u
 ### Installation
 Assuming [Stack](https://www.haskellstack.org/) is installed.
 
-    git clone git@github:ainac99/pi-calc-lts
+    git clone git@github.com:ainac99/pi-calc-lts.git
     cd pi-calc-lts
     stack install
 
